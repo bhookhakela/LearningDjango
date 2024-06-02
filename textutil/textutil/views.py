@@ -1,16 +1,8 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 def home(request):
-    return HttpResponse('''<button type="button"><a href="/cap/">Capitalize</a></button>
-                            <br>
-                            <br>
-                            <button type="button"><a href="/rempunc/">Remove Punctuation</a></button>
-                            <br>
-                            <br>
-                            <button type="button"><a href="/remnewline/">Remove NewLine</a></button>
-                            <br>
-                            <br>
-                            <button type="button"><a href="/remspace/">Remove Space</a></button>
-                        ''')
+    parameters = {'name': 'Harsh','place': 'Thane'}
+    return render(request,'index.html',parameters)
 def cap(request):
     return HttpResponse('''
                         <button type="button"><a href="/">Back</a></button>
