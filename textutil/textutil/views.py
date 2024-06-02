@@ -1,35 +1,19 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from string import punctuation
 def home(request):
     return render(request,'index.html')
-def cap(request):
-    return HttpResponse('''
-                        <button type="button"><a href="/">Back</a></button>
-                        <br>
-                        <br>
-                        &emsp;&emsp;&emsp;Capitalize the first letter
-                        ''')
-def rempunc(request):
+def analyze(request):
     homedata=request.GET.get('data', 'default')
+    removepunc=request.GET.get('rempunc', 'off')
     print(homedata)
-    # homedata should be processed and returned
-    return HttpResponse('''
-                        <button type="button"><a href="/">Back</a></button>
-                        <br>
-                        <br>
-                        &emsp;&emsp;&emsp;Remove the punctuation
-                        ''')
-def remnewline(request):
-    return HttpResponse('''
-                        <button type="button"><a href="/">Back</a></button>
-                        <br>
-                        <br>
-                        &emsp;&emsp;&emsp;Remove the Newline
-                        ''')
-def remspace(request):
-    return HttpResponse('''
-                        <button type="button"><a href="/">Back</a></button>
-                        <br>
-                        <br>
-                        &emsp;&emsp;&emsp;Remove the Space
-                        ''')
+    print(removepunc)
+    output=''
+    if removepunc=='on':
+        for char in homedata:
+            if char not in punctuation:
+                output+=char
+    else:
+        output=homedata
+    param = {'purpose': removepunc, 'analyzed_text': output}
+    return render(request,'analyze.html', param)
