@@ -1,8 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 def home(request):
-    parameters = {'name': 'Harsh','place': 'Thane'}
-    return render(request,'index.html',parameters)
+    return render(request,'index.html')
 def cap(request):
     return HttpResponse('''
                         <button type="button"><a href="/">Back</a></button>
@@ -11,6 +10,9 @@ def cap(request):
                         &emsp;&emsp;&emsp;Capitalize the first letter
                         ''')
 def rempunc(request):
+    homedata=request.GET.get('data', 'default')
+    print(homedata)
+    # homedata should be processed and returned
     return HttpResponse('''
                         <button type="button"><a href="/">Back</a></button>
                         <br>
